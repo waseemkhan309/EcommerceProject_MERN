@@ -6,6 +6,7 @@ import Policy from './pages/Policy'
 import Pagenotfound from './pages/Pagenotfound'
 import Registerr from './pages/Auth/Registerr'
 import Loginn from './pages/Auth/Loginn'
+import Dashboard from './pages/user/Dashboard'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/register" element={<Registerr/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/login" element={<Loginn/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>

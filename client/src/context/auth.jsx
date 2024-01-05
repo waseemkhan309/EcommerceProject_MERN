@@ -26,6 +26,6 @@ const AuthProvider = ({ children }) =>{
 };
 // custom hook
 const useAuth = () => useContext(AuthContext);
-// eslint-disable-next-line react-refresh/only-export-components
+// eslint-disable-next-line 
 export { useAuth , AuthProvider}
  

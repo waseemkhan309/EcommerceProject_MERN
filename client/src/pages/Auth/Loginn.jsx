@@ -5,21 +5,30 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { FaRegIdCard } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../components/Layout/context/auth';
 
 const Loginn = () => {
-  
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
 
 
   const handleForm = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:5000/api/v1/auth/login`, {  email, password });
-      
+      const res = await axios.post("http://localhost:5000/api/v1/auth/login", { email, password });
+
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token
+        })
+        // local storage ****************************************
+        localStorage.setItem('auth', JSON.stringify(res.data))
         navigate('/')
       } else {
         toast.error(res.data.message)
@@ -34,10 +43,10 @@ const Loginn = () => {
     <>
       <Layout title={"Login- Ecommerce website"}>
         <div className="register  ">
-          
-          <h1 className="my-4 "> Login <FaRegIdCard/></h1>
+
+          <h1 className="my-4 "> Login <FaRegIdCard /></h1>
           <form className="w-50 shadow-lg p-3 mb-5 bg-body-tertiary rounded" onSubmit={handleForm}>
-            
+
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
               <input type="email"
@@ -61,7 +70,7 @@ const Loginn = () => {
               />
             </div>
             <div className='mb-3'>
-            <p><Link className="link-offset-1" to='/forgetpassword'>Forget password</Link></p>
+              <p><Link className="link-offset-1" to='/forgetpassword'>Forget password</Link></p>
 
             </div>
 

@@ -1,15 +1,16 @@
 // import React from 'react'
 import Layout from "../components/Layout/Layout"
-import { useAuth } from "../components/Layout/Auth"
+import { useAuth } from "../components/Layout/context/auth"
 
 const Home = () => {
-  const [auth,setAuth] = useAuth()
+  // eslint-disable-next-line no-unused-vars
+  const [auth, setAuth] = useAuth()
   return (
     <>
-    <Layout title={"Shop Now "}>
-     <h1>HOme</h1> 
-    <pre>{JSON.stringify(auth)}</pre>
-    </Layout>
+      <Layout title={"Shop Now "}>
+        <h1>HOme</h1>
+        <pre>{JSON.stringify(auth, null, 4)}</pre>
+      </Layout>
     </>
   )
 }

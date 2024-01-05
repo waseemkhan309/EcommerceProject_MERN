@@ -17,7 +17,7 @@ const Registerr = () => {
   const handleForm = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:5000/api/v1/auth/register`, { name, email, password, phone, address });
+      const res = await axios.post("http://localhost:5000/api/v1/auth/register", { name, email, password, phone, address });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         navigate('/login')

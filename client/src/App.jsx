@@ -5,6 +5,7 @@ import Contact from './pages/Contact'
 import Policy from './pages/Policy'
 import Pagenotfound from './pages/Pagenotfound'
 import Registerr from './pages/Auth/Registerr'
+import Loginn from './pages/Auth/Loginn'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/register" element={<Registerr/>}/>
+          <Route path="/login" element={<Loginn/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/policy" element={<Policy/>}/>

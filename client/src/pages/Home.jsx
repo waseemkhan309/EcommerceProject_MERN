@@ -1,6 +1,6 @@
 // import React from 'react'
 import Layout from "../components/Layout/Layout"
-import { useAuth } from "../components/Layout/context/auth"
+import { useAuth } from "../context/auth"
 
 const Home = () => {
   // eslint-disable-next-line no-unused-vars

@@ -1,5 +1,4 @@
-// import React from 'react'
-
+import { Outlet } from "react-router-dom"
 import Layout from "../../components/Layout/Layout"
 
 const Dashboard = () => {
@@ -7,6 +6,7 @@ const Dashboard = () => {
         <>
             <Layout title={"Dashboard - Ecommerce website"}>
                 <h2>Dashboard</h2>
+                <Outlet/>
             </Layout>
         </>
     )

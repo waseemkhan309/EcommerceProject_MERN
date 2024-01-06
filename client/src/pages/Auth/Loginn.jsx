@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { FaRegIdCard } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../components/Layout/context/auth';
+import { useNavigate,useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/auth';
 
 const Loginn = () => {
 
@@ -13,6 +13,7 @@ const Loginn = () => {
   const [password, setPassword] = useState("")
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   const handleForm = async (e) => {
@@ -28,8 +29,8 @@ const Loginn = () => {
           token: res.data.token
         })
         // local storage ****************************************
-        localStorage.setItem('auth', JSON.stringify(res.data))
-        navigate('/')
+        localStorage.setItem('auth', JSON.stringify(res.data));
+        navigate( '/' || location.state )
       } else {
         toast.error(res.data.message)
       }
@@ -69,8 +70,8 @@ const Loginn = () => {
                 required
               />
             </div>
-            <div className='mb-3'>
-              <p><Link className="link-offset-1" to='/forgetpassword'>Forget password</Link></p>
+            <div className='mb-3 '>
+              <p><Link className="link-offset-1 text-decoration-none " to='/forgetpassword'>Forget password</Link></p>
 
             </div>
 

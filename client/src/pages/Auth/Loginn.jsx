@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { FaRegIdCard } from "react-icons/fa6";
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 
 const Loginn = () => {
@@ -30,7 +30,7 @@ const Loginn = () => {
         })
         // local storage ****************************************
         localStorage.setItem('auth', JSON.stringify(res.data));
-        navigate(  location.state || "/" );
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message)
       }

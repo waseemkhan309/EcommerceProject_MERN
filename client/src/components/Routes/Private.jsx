@@ -18,11 +18,10 @@ export default function PrivateRoute (){
         setOk(false);
       }
     };
-    if (auth?.token) {
-      authCheck()
-    }
-  }, [auth?.token])
+    if (auth?.token)  authCheck()
+    
+  },[auth?.token])
 
-  return ok ?   <Outlet/> :<Spinner /> ;
+  return ok ? <Outlet/> : <Spinner/> ;
 }
 

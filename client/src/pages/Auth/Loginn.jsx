@@ -30,7 +30,7 @@ const Loginn = () => {
         })
         // local storage ****************************************
         localStorage.setItem('auth', JSON.stringify(res.data));
-        navigate( '/' || location.state )
+        navigate(  location.state || "/" );
       } else {
         toast.error(res.data.message)
       }
@@ -71,7 +71,7 @@ const Loginn = () => {
               />
             </div>
             <div className='mb-3 '>
-              <p><Link className="link-offset-1 text-decoration-none " to='/forgetpassword'>Forget password</Link></p>
+              <p><Link className="link-offset-1 text-decoration-none " to='/forgetpassword'>Forget password?</Link></p>
 
             </div>
 

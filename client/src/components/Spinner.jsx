@@ -12,8 +12,9 @@ const Spinner = () => {
             setCount((preValue) => --preValue)
         },1000)
         count === 0 && navigate('/login',{
-            state: location.pathname 
-        });
+            state : location.pathname, 
+        }
+        );
         return ()=> clearInterval(interval)
     },[count,navigate,location]) 
 

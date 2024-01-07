@@ -9,9 +9,9 @@ const AuthProvider = ({ children }) =>{
         token:"",
     });
 
-    // default axios
+    // default axios - globally handle headers with request
     axios.defaults.headers.common['Authorization'] = auth?.token;
-
+    
     useEffect(()=>{
         const data = localStorage.getItem("auth");
         if(data){
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) =>{
             });
         } 
     },[]);
-
+    
     return (
         <AuthContext.Provider value={[auth,setAuth]}>
             { children }

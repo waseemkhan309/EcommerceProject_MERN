@@ -11,13 +11,14 @@ const Registerr = () => {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [address, setAddress] = useState("")
+  const [answere, setAnswere] = useState("")
   const navigate = useNavigate();
 
 
   const handleForm = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/register", { name, email, password, phone, address });
+      const res = await axios.post("http://localhost:5000/api/v1/auth/register", { name, email, password, phone, address,answere });
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         navigate('/login')
@@ -91,6 +92,16 @@ const Registerr = () => {
                 className="form-control" id="exampleInputaddress"
                 required
               />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputaddress" className="form-label">Answere</label>
+              <input type="text"
+                value={answere}
+                onChange={(e) => setAnswere(e.target.value)}
+                className="form-control" id="exampleInputaddress"
+                required
+              />
+              <span>Answere field is important for password forgeting , text must be short and easy like it may be your nickname etc</span>
             </div>
 
             <button type="submit" className="btn btn-primary">Submit</button>

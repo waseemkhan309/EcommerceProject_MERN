@@ -8,6 +8,7 @@ import Registerr from './pages/Auth/Registerr'
 import Loginn from './pages/Auth/Loginn'
 import Dashboard from './pages/user/Dashboard'
 import PrivateRoute from './components/Routes/Private'
+import Forgetpassword from './pages/Auth/Passwordforget' 
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/user' element={<Dashboard />} />
 
         <Route path="/login" element={<Loginn />} />
+        <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />

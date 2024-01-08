@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken"
 const registerController = async (req, res) => {
   try {
     // Get the data
-    const { name, email, password, phone, address } = req.body;
+    const { name, email, password, phone, address,answere } = req.body;
     // validation
     if (!name) {
       return res.send({ message: "Name is Requied" });
@@ -21,6 +21,9 @@ const registerController = async (req, res) => {
     }
     if (!address) {
       return res.send({ message: "Address is Requied" });
+    }
+    if (!answere) {
+      return res.send({ message: "Answere is Requied" });
     }
     // userExisting
     // const checkEmail = req.body.email;
@@ -40,6 +43,7 @@ const registerController = async (req, res) => {
       phone,
       address,
       password: hashedPassword,
+      answere
     }).save();
 
     res.status(201).send({
@@ -114,4 +118,54 @@ const testController = (req,res)=>{
         res.send("Protected Route");        
     
 }
-export { registerController,loginController ,testController};
+
+const forgetpassword = async (req, res) => {
+  try {
+    // Get the data
+    const { email, newpassword , answere } = req.body;
+    // validation
+    if (!email ) {
+      return res.send({ message: "email is required" });
+    }
+    if (!newpassword ) {
+      return res.send({ message: "newpassword is required" });
+    }
+    if (!answere ) {
+      return res.send({ message: "answere is required" });
+    }
+    // userExisting
+    // const checkEmail = req.body.email;
+    const existingUser = await userModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(200).send({
+        success: false,
+        message: "Email not register please register",
+      });
+    }
+    // Hashing password
+    const hashed = await hashPassword(newpassword);
+    // save
+    if(answere === existingUser.answere){
+      await userModel.findByIdAndUpdate(existingUser._id,{password:hashed})
+      res.status(201).send({
+        success: true,
+        message: "Password Forget  Successfully",
+        existingUser,
+      });
+    }else{
+       return res.send({
+        message: "anwere is Wrong",
+      
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Registration",
+      error,
+    });
+  }
+};
+
+export { registerController,loginController ,testController,forgetpassword};

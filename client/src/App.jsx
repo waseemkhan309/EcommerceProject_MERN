@@ -9,6 +9,8 @@ import Loginn from './pages/Auth/Loginn'
 import Dashboard from './pages/user/Dashboard'
 import PrivateRoute from './components/Routes/Private'
 import Forgetpassword from './pages/Auth/Passwordforget' 
+import AdminDashboard from './pages/Admin/AdminDashboard'
+import AdminRoute from './components/Routes/AdminRoute'
 
 const App = () => {
   return (
@@ -18,9 +20,11 @@ const App = () => {
         <Route path="/register" element={<Registerr />} />
 
         <Route path='/dashboard' element={<PrivateRoute />}>
-          <Route path='' element={<Dashboard />} />
+          <Route path='user' element={<Dashboard />} />
         </Route>
-        <Route path='/user' element={<Dashboard />} />
+        <Route path='/dashboard' element={<AdminRoute/>}>
+          <Route path='admin' element={<AdminDashboard/>}/>
+        </Route>
 
         <Route path="/login" element={<Loginn />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />

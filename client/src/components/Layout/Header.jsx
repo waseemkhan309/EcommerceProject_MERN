@@ -38,9 +38,7 @@ const Header = () => {
                   <li><Link className="dropdown-item" >Watch</Link></li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link " to='/cart'>Cart(0)</NavLink>
-              </li>
+
               {
                 !auth.user ? (
                   <>
@@ -60,7 +58,8 @@ const Header = () => {
                         </NavLink>
                         <ul className="dropdown-menu">
                           <li>
-                            <NavLink className="dropdown-item" to="/dashboard">Dashboard</NavLink>
+                            <NavLink className="dropdown-item" to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"
+                              }`}> Dashboard </NavLink>
                           </li>
                           <li>
                             <NavLink onClick={handleLogout} className="dropdown-item" to='/login' >Logout</NavLink>
@@ -72,7 +71,9 @@ const Header = () => {
 
                   </>)
               }
-
+              <li className="nav-item">
+                <NavLink className="nav-link " to='/cart'>Cart(0)</NavLink>
+              </li>
             </ul>
 
           </div>

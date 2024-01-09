@@ -68,7 +68,7 @@ const loginController = async(req,res)=>{
       if(!email || !password){
         res.status(401).send({
           success:false,
-          message:"Invalid username or password",
+          message:"Invalid email or password",
         })
       }
 
@@ -97,6 +97,7 @@ const loginController = async(req,res)=>{
           email:user.email,
           phone:user.phone,
           address:user.address,
+          role:user.role,
         },
         token,
       })

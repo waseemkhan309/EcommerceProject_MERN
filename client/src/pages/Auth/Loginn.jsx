@@ -19,6 +19,7 @@ const Loginn = () => {
   const handleForm = async (e) => {
     e.preventDefault();
     try {
+      
       const res = await axios.post("http://localhost:5000/api/v1/auth/login", { email, password });
 
       if (res && res.data.success) {

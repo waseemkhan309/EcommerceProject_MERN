@@ -19,15 +19,26 @@ export const requireSignIn = async (req, res, next) => {
 // addmin access
 export const isAdmin = async (req, res, next) => {
   try {
-    const user = await userModel.findById(req.user._id);
-    if (user && user.role !== 1) {
-      res.status(401).send({
-        success: false,
-        message: "UnAuthorize Access",
-      });
-    } else {
-      next();
-    }
+    // console.log(req.user._is)
+    const user = await userModel.findById(req.user._is);
+    // const user = await userModel.findById(req.user._id);
+    // if (user && user.role !== 1) {
+    //   return res.status(401).send({
+    //     success: false,
+    //     message: "UnAuthorize Access",
+    //   });
+    // } else {
+    //   next();
+    // }
+    // console.log(user)
+      if(user && user.role === 1){
+        next()
+      }else{
+         res.status(401).send({
+          success:false,
+          message:"Unauthorize access"
+        })
+      }
   } catch (error) {
     console.log(error);
     res.status(401).send({

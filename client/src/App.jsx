@@ -8,9 +8,14 @@ import Registerr from './pages/Auth/Registerr'
 import Loginn from './pages/Auth/Loginn'
 import Dashboard from './pages/user/Dashboard'
 import PrivateRoute from './components/Routes/Private'
-import Forgetpassword from './pages/Auth/Passwordforget' 
+import Forgetpassword from './pages/Auth/Passwordforget'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import AdminRoute from './components/Routes/AdminRoute'
+import CreateCategory from './pages/Admin/CreateCategory'
+import CreateProduct from './pages/Admin/CreateProduct'
+import Orders from './pages/user/Orders'
+import Profile from './pages/user/Profile'
+import Users from './pages/Admin/users'
 
 const App = () => {
   return (
@@ -21,9 +26,14 @@ const App = () => {
 
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='user' element={<Dashboard />} />
+          <Route path='user/order' element={<Orders/>} />
+          <Route path='user/profile' element={<Profile/>} />
         </Route>
-        <Route path='/dashboard' element={<AdminRoute/>}>
-          <Route path='admin' element={<AdminDashboard/>}/>
+        <Route path='/dashboard' element={<AdminRoute />}>
+          <Route path='admin' element={<AdminDashboard />} />
+          <Route path='admin/create-category' element={<CreateCategory />} />
+          <Route path='admin/create-product' element={<CreateProduct />} />
+          <Route path='admin/users' element={<Users />} />
         </Route>
 
         <Route path="/login" element={<Loginn />} />

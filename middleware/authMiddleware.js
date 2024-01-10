@@ -13,7 +13,7 @@ export const requireSignIn = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // addmin access
 export const isAdmin = async (req, res, next) => {

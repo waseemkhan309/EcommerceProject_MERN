@@ -8,7 +8,6 @@ export const requireSignIn = async (req, res, next) => {
       req.headers.authorization,
       process.env.JWT_SECRET
     );
-
     req.user = decode;
     next();
   } catch (error) {
@@ -31,14 +30,14 @@ export const isAdmin = async (req, res, next) => {
     //   next();
     // }
     // console.log(user)
-      if(user && user.role === 1){
-        next()
-      }else{
-         res.status(401).send({
-          success:false,
-          message:"Unauthorize access"
-        })
-      }
+    if (user && user.role === 1) {
+      next();
+    } else {
+      res.status(401).send({
+        success: false,
+        message: "Unauthorize access",
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(401).send({

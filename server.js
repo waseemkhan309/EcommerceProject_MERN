@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectiondb from "./config/Db.js";
 import authRouters from './routes/authRoute.js';
 import categoryRoute from './routes/categoryRoute.js'
+import productRoute from './routes/productRoute.js'
 import cors from 'cors'
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(morgan('dev'));
 // routers
 app.use('/api/v1/auth',authRouters)
 app.use('/api/v1/category',categoryRoute)
+app.use('/api/v1/product',productRoute)
 // API
 app.get('/',(req,res)=>{
     res.send({

@@ -4,7 +4,7 @@ import categoryModel from "../model/categoryModel.js";
 // create category || POST
 const createCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name } = req.body
     if (!name) {
       return res.status(401).send({ message: "Name is required" });
     } 
@@ -101,7 +101,7 @@ const singlecategoryController = async (req, res) => {
 const deleteCategory = async(req,res)=>{
     try{
         const {id} = req.params;
-        await categoryModel.findByIdAndDelete(id);
+        await categoryModel.findByIdAndDelete(id)
         res.status(200).send({
             success:true,
             message:" Successfully Deleted "

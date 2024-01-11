@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import categoryModel from './categoryModel'
+
 const productSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -27,12 +27,12 @@ const productSchema = new mongoose.Schema({
         required:true
     },
     photo:{
-        data:Buffer,
+        data: Buffer,
         contentType:String
     },
     shipping:{
         type:Boolean,
-        
+
     }
 },
 {

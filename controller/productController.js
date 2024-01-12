@@ -96,6 +96,8 @@ const updateProductController = async (req, res) => {
     });
   }
 };
+
+// get products
 const getProductController = async (req, res) => {
   try {
     const products = await productModel

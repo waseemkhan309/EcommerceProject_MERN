@@ -35,8 +35,8 @@ const CreateCategory = () => {
     const getAllCattegory = async () => {
         try {
             const { data } = await axios.get('http://localhost:5000/api/v1/category/get-category')
-            if (data.success) {
-                setCategories(data.category);
+            if (data?.success) {
+                setCategories(data?.category);
             }
         } catch (err) {
             console.log(err);
@@ -48,35 +48,34 @@ const CreateCategory = () => {
         getAllCattegory();
     }, [])
     // handle update
-    const handleUpdate=async(e)=>{
+    const handleUpdate = async (e) => {
         e.preventDefault();
-        try{
-            const {data} = await axios.put(`http://localhost:5000/api/v1/category/update-category/${selected._id}`,{name:updatedName})
-            if(data){
+        try {
+            const { data } = await axios.put(`http://localhost:5000/api/v1/category/update-category/${selected._id}`, { name: updatedName })
+            if (data) {
                 toast.success(`${updatedName} is updated`)
                 setSelected(null)
                 setUpdatedName("")
                 setVisible(false)
                 getAllCattegory()
-            }else{
+            } else {
                 toast.error(data.message)
             }
-        }catch(err){
-                toast.error("Error in update Category")
+        } catch (err) {
+            toast.error("Error in update Category")
         }
     }
     // handle del
-    const handleDel=async(pId)=>{
-        try{
-            // eslint-disable-next-line no-unused-vars
-            const {data} = await axios.delete(`http://localhost:5000/api/v1/category/delete-category/${pId}`)
-            if(data.success){
+    const handleDel = async (pId) => {
+        try {
+            const { data } = await axios.delete(`http://localhost:5000/api/v1/category/delete-category/${pId}`)
+            if (data.success) {
                 toast.success(`category is delete`)
                 getAllCattegory()
-            }else{
+            } else {
                 toast.error(data.message)
             }
-        }catch(err){
+        } catch (err) {
             toast.error('Error in Delete category')
         }
     }
@@ -111,8 +110,12 @@ const CreateCategory = () => {
                                                 <tr>
                                                     <td key={c._id}>{c.name}</td>
                                                     <td>
-                                                        <button className='btn btn-success ms-2' onClick={() => { setVisible(true); setUpdatedName(c.name); setSelected(c)  }}>Edit</button>
-                                                        <button className='btn btn-danger ms-2' onClick={()=>{handleDel(c._id)}}>Del</button>
+                                                        <button className='btn btn-success ms-2' onClick={() => {
+                                                            setVisible(true);
+                                                            setUpdatedName(c.name);
+                                                            setSelected(c)
+                                                        }}>Edit</button>
+                                                        <button className='btn btn-danger ms-2' onClick={() => { handleDel(c._id) }}>Del</button>
                                                     </td>
                                                 </tr>
                                             </>
@@ -121,8 +124,14 @@ const CreateCategory = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <Modal onCancel={() => setVisible(false)} footer={null} visible={visible}>
-                            <Categoryform value={updatedName} setValue={setUpdatedName} handleSubmit={handleUpdate} />
+                        <Modal
+                            onCancel={() =>
+                                setVisible(false)}
+                            footer={null}
+                            visible={visible}>
+                            <Categoryform value={updatedName}
+                                setValue={setUpdatedName}
+                                handleSubmit={handleUpdate} />
                         </Modal>
                     </div>
                 </div>

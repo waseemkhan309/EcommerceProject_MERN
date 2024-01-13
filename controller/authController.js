@@ -36,7 +36,7 @@ const registerController = async (req, res) => {
     }
     // Hashing password
     const hashedPassword = await hashPassword(password);
-    // save
+    // save in database
     const user = await new userModel({
       name,
       email,
@@ -60,7 +60,7 @@ const registerController = async (req, res) => {
     });
   }
 };
-
+// login || POST
 const loginController = async(req,res)=>{
     try{
       const {email,password} = req.body;
@@ -87,7 +87,7 @@ const loginController = async(req,res)=>{
         })
       }
       // token
-      const token = JWT.sign({_is:user._id},process.env.JWT_SECRET,{expiresIn:"7d"});
+      const token = JWT.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:"7d"});
 
       res.status(200).send({
         success:true,
@@ -101,9 +101,6 @@ const loginController = async(req,res)=>{
         },
         token,
       })
-
-
-
     }catch(error){
         console.log(error);
         res.status(500).send({
@@ -113,13 +110,11 @@ const loginController = async(req,res)=>{
         })
     }
 }
-
+// || GET
 const testController = (req,res)=>{
-    
         res.send("Protected Route");        
-    
 }
-
+// forget password || POST
 const forgetpassword = async (req, res) => {
   try {
     // Get the data

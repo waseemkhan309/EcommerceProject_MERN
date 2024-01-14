@@ -19,20 +19,21 @@ import Users from './pages/Admin/users'
 import Products from './pages/Admin/Products'
 import UpdateProduct from './pages/Admin/UpdateProduct'
 import SearchPage from './pages/SearchPage'
-
+import ProductDetails from './pages/ProductDetails'
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/productdetail/:slug" element={<ProductDetails />} />
         <Route path="/register" element={<Registerr />} />
         <Route path="/search" element={<SearchPage />} />
 
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='user' element={<Dashboard />} />
-          <Route path='user/order' element={<Orders/>} />
-          <Route path='user/profile' element={<Profile/>} />
+          <Route path='user/order' element={<Orders />} />
+          <Route path='user/profile' element={<Profile />} />
         </Route>
         <Route path='/dashboard' element={<AdminRoute />}>
           <Route path='admin' element={<AdminDashboard />} />

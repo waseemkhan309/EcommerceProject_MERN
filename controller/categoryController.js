@@ -1,13 +1,14 @@
 import slugify from "slugify";
 import categoryModel from "../model/categoryModel.js";
+import productModel from "../model/productModel.js";
 
 // create category || POST
 const createCategoryController = async (req, res) => {
   try {
-    const { name } = req.body
+    const { name } = req.body;
     if (!name) {
       return res.status(401).send({ message: "Name is required" });
-    } 
+    }
     const existingcategory = await categoryModel.findOne({ name });
     if (existingcategory) {
       res.status(200).send({
@@ -80,14 +81,13 @@ const categoryController = async (req, res) => {
 // get single category  || GET
 const singlecategoryController = async (req, res) => {
   try {
-    const slug =  req.params.slug
-    const category = await categoryModel.findOne({slug});
+    const slug = req.params.slug;
+    const category = await categoryModel.findOne({ slug });
     res.status(200).send({
       success: true,
       message: "Category Found",
       category,
     });
-
   } catch (err) {
     res.status(500).send({
       success: false,
@@ -98,28 +98,27 @@ const singlecategoryController = async (req, res) => {
 };
 
 // delete categoory by id || delete
-const deleteCategory = async(req,res)=>{
-    try{
-        const {id} = req.params;
-        await categoryModel.findByIdAndDelete(id)
-        res.status(200).send({
-            success:true,
-            message:" Successfully Deleted "
-        })
-
-    }catch(err){
-        res.status(500).send({
-            success:false,
-            message:"Error in delete category",
-            err
-        })
-    }
-}
+const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await categoryModel.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: " Successfully Deleted ",
+    });
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: "Error in delete category",
+      err,
+    });
+  }
+};
 
 export {
   createCategoryController,
   updateCategoryController,
   categoryController,
   singlecategoryController,
-  deleteCategory
+  deleteCategory,
 };

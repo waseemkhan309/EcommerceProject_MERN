@@ -18,6 +18,7 @@ import Profile from './pages/user/Profile'
 import Users from './pages/Admin/users'
 import Products from './pages/Admin/Products'
 import UpdateProduct from './pages/Admin/UpdateProduct'
+import SearchPage from './pages/SearchPage'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Registerr />} />
+        <Route path="/search" element={<SearchPage />} />
 
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='user' element={<Dashboard />} />
@@ -36,6 +38,7 @@ const App = () => {
           <Route path='admin' element={<AdminDashboard />} />
           <Route path='admin/create-category' element={<CreateCategory />} />
           <Route path='admin/create-product' element={<CreateProduct />} />
+          <Route path='admin/product/:slug' element={<UpdateProduct />} />
           <Route path='admin/product/:slug' element={<UpdateProduct />} />
           <Route path='admin/products' element={<Products />} />
           <Route path='admin/users' element={<Users />} />

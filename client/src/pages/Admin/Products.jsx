@@ -46,7 +46,7 @@ const Products = () => {
                         </div>
                         <div className="col-md-9">
                             <h1 className='text-center'>All Products Lists</h1>
-                            <div className="d-flex ">
+                            <div className="d-flex flex-wrap">
                                 {
                                     products.map(p => (
 
@@ -54,9 +54,9 @@ const Products = () => {
                                             <img className="card-img-top object-cover " height={"200px"} src={`http://localhost:5000/api/v1/product/get-photo/${p._id}`} alt={p.name} />
                                             <div className="card-body">
                                                 <h5 className="card-title">{p.name}</h5>
-                                                <p className="card-title">{p.description}</p>
-                                                <p className="card-text">{p.price}</p>
-                                                <p className="card-text">Rating XXXXX</p>
+                                                <p className="card-title">{p.description.substring(0,30)}...</p>
+                                                <p className="card-text">Price: {p.price}</p>
+                                                {/* <p className="card-text">Rating XXXXX</p> */}
                                             </div>
                                             <div className="mb-3 text-center">
                                                 <Link to={`/dashboard/admin/product/${p.slug}`}>

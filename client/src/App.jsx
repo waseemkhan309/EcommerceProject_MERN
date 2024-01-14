@@ -20,6 +20,7 @@ import Products from './pages/Admin/Products'
 import UpdateProduct from './pages/Admin/UpdateProduct'
 import SearchPage from './pages/SearchPage'
 import ProductDetails from './pages/ProductDetails'
+import CategoryProduct from './pages/CategoryProduct'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productdetail/:slug" element={<ProductDetails />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/register" element={<Registerr />} />
         <Route path="/search" element={<SearchPage />} />
 

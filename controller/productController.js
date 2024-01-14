@@ -1,6 +1,8 @@
 import slugify from "slugify";
 import productModel from "../model/productModel.js";
+import CategoryModel from "../model/categoryModel.js";
 import fs from "fs";
+import categoryModel from "../model/categoryModel.js";
 
 // create products || POST method
 const createProductController = async (req, res) => {
@@ -271,6 +273,25 @@ const searchProductController = async (req, res) => {
     });
   }
 };
+const productCategoryController=async(req,res)=>{
+    try{
+      const category = await categoryModel.find({slug:req.params.slug})
+      const products = await productModel.find({category}).populate('category')
+      res.status(200).send({
+        success:true,
+        category,
+        products
+      })
+
+    }catch(err){
+      console.log(err);
+      res.status(400).send({
+        success:false,
+        message:"Error in Product by Category ",
+        err
+      })
+    }
+}
 
 export {
   createProductController,
@@ -283,4 +304,5 @@ export {
   productCountController,
   productListController,
   searchProductController,
+  productCategoryController
 };

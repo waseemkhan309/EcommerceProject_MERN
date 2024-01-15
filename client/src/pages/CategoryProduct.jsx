@@ -31,7 +31,7 @@ const CategoryList = () => {
     <Layout title={'Category - Ecommerce Website'}>
       <div className="col-md-9  border-start">
               <h3 className="text-center m-3"> Category :  {category[0]?.name}</h3>
-            <h5 className="text-center m-3"> Length of Products  {product?.length}</h5>
+            <h5 className="text-center m-3">{product?.length}  Result Found</h5>
             <div className="d-flex flex-wrap  ">
               {
                 product?.map(p => (

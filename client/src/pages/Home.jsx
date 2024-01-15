@@ -3,11 +3,15 @@ import { useState, useEffect } from "react"
 import Layout from "../components/Layout/Layout"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import toast from "react-hot-toast"
 import { Checkbox, Radio } from 'antd'
 import { Price } from "../components/Price"
 import { useNavigate } from "react-router-dom"
+import { useCart } from '../context/cart'
 
 const Home = () => {
+  const [cart, setCart] = useCart();
+
   const [products, setProducts] = useState([])
   const [Categories, setCategories] = useState([])
   const [checked, setChecked] = useState([])
@@ -152,8 +156,16 @@ const Home = () => {
                       <p className="card-text">Price: {p.price}</p>
                       {/* <p className="card-text">Rating: XXXXX</p> */}
                       <div className="">
-                        <button className="btn btn-outline-secondary" >Add to card</button>
-                        <button className="btn btn-outline-secondary ms-1" onClick={()=> navigate(`/productdetail/${p.slug}`)} >More Detail</button>
+                        <button className="btn btn-outline-secondary"
+                          onClick={() => {
+                            setCart([...cart, p])
+                            localStorage.setItem("cart",JSON.stringify([...cart,p]))
+                            toast.success("Item add to cart")
+                          }}
+                        >
+                          Add to card
+                        </button>
+                        <button className="btn btn-outline-secondary ms-1" onClick={() => navigate(`/productdetail/${p.slug}`)} >More Detail</button>
                       </div>
                     </div>
                   </div>

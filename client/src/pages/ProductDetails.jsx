@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout/Layout'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-
+import { useCart } from '../context/cart'
+import toast from 'react-hot-toast'
 
 const ProductDetails = () => {
     const [detail, setDetail] = useState({})
+    const [cart, setCart] = useCart();
     const params = useParams()
+    
     const getproductdetail = async () => {
         try {
             const { data } = await axios.get(`http://localhost:5000/api/v1/product/get-product/${params.slug}`)
@@ -37,7 +40,13 @@ const ProductDetails = () => {
                     {/* <h3>Quantity:  {detail.quantity}</h3> */}
                     {/* <h5>Total Price : $ {(detail.price)*(detail.quantity)}</h5> */}
                     <div className='mt-5'>
-                        <button className='btn btn-outline-info'>Add to card</button>
+                        <button className='btn btn-outline-info'
+                        onClick={() => {
+                            setCart([...cart, detail])
+                            localStorage.setItem("cart",JSON.stringify([...cart,detail]))
+                            toast.success("Item add to cart")
+                          }}
+                        >Add to card</button>
                     </div>
                 </div>
             </div>

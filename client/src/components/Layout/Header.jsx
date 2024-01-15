@@ -1,13 +1,17 @@
-// import React from 'react'
-
+/* eslint-disable no-unused-vars */
+import React from 'react'
 import { NavLink, Link } from "react-router-dom"
 import { useAuth } from "../../context/auth"
 import toast from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
+import { BsCartCheck } from "react-icons/bs";
+import { Badge } from 'antd'
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
   const categories = useCategory()
 
   const handleLogout = () => {
@@ -88,7 +92,11 @@ const Header = () => {
                   </>)
               }
               <li className="nav-item">
-                <NavLink className="nav-link " to='/cart'>Cart(0)</NavLink>
+                <NavLink className="nav-link " to='/cart'>
+                  <Badge count={cart?.length} showZero>
+                  <BsCartCheck  className='fs-3'/> 
+                  </Badge>
+                </NavLink>
               </li>
             </ul>
 

@@ -2,11 +2,12 @@ import slugify from "slugify";
 import productModel from "../model/productModel.js";
 import fs from "fs";
 import categoryModel from "../model/categoryModel.js";
-import OrderModel from "../model/OrderModel.js";
+import orderModel from "../model/orderModel.js";
 import braintree from "braintree";
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
+// return token from gateway
 var gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
   merchantId: process.env.BRAINTREE_MERCHANT_ID,
@@ -305,7 +306,7 @@ const productCategoryController = async (req, res) => {
 // payment gateway API
 const braintreeTokenController = async (req, res) => {
   try {
-    gateway.clientToken .generate({}, function (err, response) {
+    gateway.clientToken.generate({}, function (err, response) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -332,16 +333,16 @@ const braintreePaymentController = async (req, res) => {
           submitForSettlement: true,
         },
       },
-      function (err, result) {
+      function (error, result) {
         if (result) {
-          const order = new OrderModel({
+          const order = new orderModel({
             products: cart,
             payment: result,
             buyer: req.user._id,
-          }).send();
+          }).save();
           res.json({ ok: true });
         } else {
-          res.status(500).send(err);
+          res.status(500).send(error);
         }
       }
     );

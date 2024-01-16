@@ -54,7 +54,7 @@ router.get("/searchproduct/:keyword", searchProductController);
 // category wise product get
 router.get("/product-category/:slug", productCategoryController);
 // payment route  ~~ token
-router.get("/brainetree/token", braintreeTokenController);
+router.get("/braintree/token", braintreeTokenController);
 // payments
 router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 

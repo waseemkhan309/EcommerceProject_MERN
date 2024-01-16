@@ -47,7 +47,7 @@ const CartPage = () => {
     // get payment  gateway token
     const getToken = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/v1/product/brainetree/token')
+            const { data } = await axios.get('http://localhost:5000/api/v1/product/braintree/token')
             setClientToken(data?.clientToken)
 
         } catch (err) {
@@ -62,7 +62,7 @@ const CartPage = () => {
     const handleCartPayment = async () => {
         try {
             setLoading(true)
-            const { nonce } = instance.requestPaymentMethod();
+            const { nonce } =await instance.requestPaymentMethod();
             const { data } = await axios.post('http://localhost:5000/api/v1/product/braintree/payment', {
                 nonce, cart
             })
@@ -118,22 +118,24 @@ const CartPage = () => {
                         <span> {auth?.token ? auth?.user?.address : " Login for further process Proceess"} .</span>
                         <span className='d-block'>Update address?  <Link to='/dashboard/user/profile'>Click here</Link></span>
                     </div>
-                    <div className="mt-2">
+                    <div className="m-3">
                         {
-                            !clientToken || !cart?.length ? ("") : (
+                            !clientToken || !cart?.length  ?  ("") : (
                                 <>
                                     <DropIn
                                         options={{
                                             authorization: clientToken,
+                                            paypal:{
+                                                flow:'vault'
+                                            }
                                         }}
-                                        onInstance={instance => setInstance(instance)}
+                                        onInstance={i => setInstance(i)}
                                     />
                                     <button className='btn btn-primary'
                                         onClick={handleCartPayment}
-                                        // disabled={!loading || !instance || !auth?.user?.address}
+                                        disabled={loading || !instance || !auth?.user?.address }
                                     >
-                                        {/* {loading ? "Loading..." : "Make Payment"} */}
-                                        Make Payment
+                                        { loading ? "Loading..." : "Make Payment" }
                                     </button>
                                 </>
                             )

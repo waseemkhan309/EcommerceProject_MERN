@@ -6,6 +6,7 @@ import { FaRegAddressCard } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const Registerr = () => {
+  
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")

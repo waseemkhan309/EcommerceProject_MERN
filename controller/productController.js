@@ -4,6 +4,8 @@ import fs from "fs";
 import categoryModel from "../model/categoryModel.js";
 import OrderModel from "../model/OrderModel.js";
 import braintree from "braintree";
+import dotenv from 'dotenv'
+dotenv.config()
 
 var gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,

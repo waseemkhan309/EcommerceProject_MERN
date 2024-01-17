@@ -1,4 +1,5 @@
 import userModel from "../model/userModel.js";
+import orderModel from "../model/orderModel.js";
 import mongoose from "mongoose";
 import { comparePassword, hashPassword } from "../utils/authUtils.js";
 import JWT from "jsonwebtoken";
@@ -205,10 +206,29 @@ const updateProfileController = async (req, res) => {
   }
 };
 
+// order || get Method
+const getOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyers: req.user._id })
+      .populate("products", "-photo")
+      .populate("buyers", "name");
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Error in Order controller auth",
+      err,
+    });
+  }
+};
+
 export {
   registerController,
   loginController,
   testController,
   forgetpassword,
   updateProfileController,
+  getOrdersController,
 };

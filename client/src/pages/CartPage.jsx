@@ -62,7 +62,7 @@ const CartPage = () => {
     const handleCartPayment = async () => {
         try {
             setLoading(true)
-            const { nonce } =await instance.requestPaymentMethod();
+            const { nonce } = await instance.requestPaymentMethod();
             const { data } = await axios.post('http://localhost:5000/api/v1/product/braintree/payment', {
                 nonce, cart
             })
@@ -76,6 +76,7 @@ const CartPage = () => {
             setLoading(false)
         }
     };
+
     return (
         <Layout title={'Cart -Ecommerce website'}>
             <div className="row container-fluid mt-2 ">
@@ -120,29 +121,28 @@ const CartPage = () => {
                     </div>
                     <div className="m-3">
                         {
-                            !clientToken || !cart?.length  ?  ("") : (
+                            !clientToken || !cart?.length ? ("") : (
                                 <>
                                     <DropIn
                                         options={{
                                             authorization: clientToken,
-                                            paypal:{
-                                                flow:'vault'
+                                            paypal: {
+                                                flow: 'vault'
                                             }
                                         }}
                                         onInstance={i => setInstance(i)}
                                     />
                                     <button className='btn btn-primary'
                                         onClick={handleCartPayment}
-                                        disabled={loading || !instance || !auth?.user?.address }
+                                        disabled={loading || !instance || !auth?.user?.address}
                                     >
-                                        { loading ? "Loading..." : "Make Payment" }
+                                        {loading ? "Loading..." : "Make Payment"}
                                     </button>
                                 </>
                             )
                         }
                     </div>
                 </div>
-
             </div>
         </Layout>
     )

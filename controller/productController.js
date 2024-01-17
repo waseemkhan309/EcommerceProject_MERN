@@ -337,8 +337,8 @@ const braintreePaymentController = async (req, res) => {
         if (result) {
           const order = new orderModel({
             products: cart,
+            buyers: req.user._id,
             payment: result,
-            buyer: req.user._id,
           }).save();
           res.json({ ok: true });
         } else {

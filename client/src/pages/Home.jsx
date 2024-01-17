@@ -36,6 +36,7 @@ const Home = () => {
     }
     loadMore()
   }, [page])
+
   // load more
   const loadMore = async () => {
     try {
@@ -48,6 +49,7 @@ const Home = () => {
       console.log(err)
     }
   }
+
   // Filter by cat
   const handleFilter = (value, id) => {
     let all = [...checked]
@@ -58,6 +60,7 @@ const Home = () => {
     }
     setChecked(all)
   }
+
   // get filtered product
   const filterProduct = async () => {
     try {
@@ -115,6 +118,13 @@ const Home = () => {
   return (
     <>
       <Layout title={"All Products - Shop Now "}>
+        <div className="container w-full">
+         <div className="p-5"> 
+                <img className="d-block w-100 object-cover" height={"300px"} src="/images/slide1.jpg" alt="First slide" />
+              </div> 
+        </div>
+      
+        {/* ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
         <div className="container-fluid row">
           <div className="col-md-2 m-5">
             <div className="d-flex flex-column">
@@ -159,7 +169,7 @@ const Home = () => {
                         <button className="btn btn-outline-secondary"
                           onClick={() => {
                             setCart([...cart, p])
-                            localStorage.setItem("cart",JSON.stringify([...cart,p]))
+                            localStorage.setItem("cart", JSON.stringify([...cart, p]))
                             toast.success("Item add to cart")
                           }}
                         >

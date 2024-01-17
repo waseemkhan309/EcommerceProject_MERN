@@ -209,8 +209,7 @@ const updateProfileController = async (req, res) => {
 // order || get Method
 const getOrdersController = async (req, res) => {
   try {
-    const orders = await orderModel
-      .find({ buyers: req.user._id })
+    const orders = await orderModel.find({ buyers: req.user._id })
       .populate("products", "-photo")
       .populate("buyers", "name");
     res.json(orders);

@@ -1,6 +1,6 @@
 import slugify from "slugify";
-import productModel from "../model/productModel.js";
 import fs from "fs";
+import productModel from "../model/productModel.js";
 import categoryModel from "../model/categoryModel.js";
 import orderModel from "../model/orderModel.js";
 import braintree from "braintree";
@@ -18,8 +18,7 @@ var gateway = new braintree.BraintreeGateway({
 // create products || POST method
 const createProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, category, quantity, shipping } =
-      req.fields; // contains non-file fields
+    const { name, slug, description, price, category, quantity, shipping } = req.fields; // contains non-file fields
     const { photo } = req.files; // contains files
     switch (true) {
       case !name:

@@ -209,7 +209,8 @@ const updateProfileController = async (req, res) => {
 // order || get Method
 const getOrdersController = async (req, res) => {
   try {
-    const orders = await orderModel.find({ buyers: req.user._id })
+    const orders = await orderModel
+      .find({ buyers: req.user._id })
       .populate("products", "-photo")
       .populate("buyers", "name");
     res.json(orders);
@@ -223,6 +224,42 @@ const getOrdersController = async (req, res) => {
   }
 };
 
+// get All orders
+const getAllOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({})
+      .populate("products", "-photo")
+      .populate("buyers", "name")
+      // .sort({ createdAt: "1" })
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Error in Order controller auth",
+      err,
+    });
+  }
+};
+// order-status
+const orderStatusController=async(req,res)=>{
+  try{
+    const { orderId } = req.params
+    const { status } = req.body
+    const order = await orderModel.findByIdAndUpdate(orderId,{status},{new:true})
+    res.json(order)
+
+  }catch(err){
+    console.log(err)
+    res.status(400).send({
+      success:false,
+      message:"Error in Admin orderStatus",
+      err
+    })
+  }
+}
+
 export {
   registerController,
   loginController,
@@ -230,4 +267,6 @@ export {
   forgetpassword,
   updateProfileController,
   getOrdersController,
+  getAllOrdersController,
+  orderStatusController
 };

@@ -22,6 +22,7 @@ import SearchPage from './pages/SearchPage'
 import ProductDetails from './pages/ProductDetails'
 import CategoryProduct from './pages/CategoryProduct'
 import CartPage from './pages/CartPage'
+import AdminOrders from './pages/Admin/AdminOrders'
 
 const App = () => {
   return (
@@ -47,6 +48,7 @@ const App = () => {
           <Route path='admin/product/:slug' element={<UpdateProduct />} />
           <Route path='admin/products' element={<Products />} />
           <Route path='admin/users' element={<Users />} />
+          <Route path='admin/orders' element={<AdminOrders />} />
         </Route>
 
         <Route path="/login" element={<Loginn />} />

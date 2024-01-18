@@ -9,13 +9,15 @@ import cors from 'cors'
 import path from 'path'
 dotenv.config();
 const app = express();
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 
 connectiondb();
 // middleware's
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(express.static(path.json(__dirname,'./client/build')))
+app.use(express.static(path.join(__dirname, './client/dist')));
 
 // routers
 app.use('/api/v1/auth',authRouters)
@@ -23,7 +25,7 @@ app.use('/api/v1/category',categoryRoute)
 app.use('/api/v1/product',productRoute)
 // API
 app.use('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'./client/build/index.html'))
+    res.sendFile(path.join(__dirname,'./client/dist/index.html'))
 })
 // create server
 const port = process.env.PORT || 8080;  
